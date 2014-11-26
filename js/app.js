@@ -1,11 +1,11 @@
 var App = Ember.Application.create({});
-App.ApplicationAdapter = DS.FixtureAdapter;
+//App.ApplicationAdapter = DS.FixtureAdapter;
 
 
-//App.ApplicationAdapter = DS.RESTAdapter.extend({
-//    namespace: 'api/v1',
-//    host: 'http://localhost:8080'
-//});
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+    //namespace: 'api/v1',
+    host: 'http://localhost:8080'
+});
 
 App.Router.map(function () {
     this.resource('books');
@@ -18,6 +18,12 @@ App.Router.map(function () {
     //});
 });
 
+//if (window.history && window.history.pushState) {
+//    App.Router.reopen({
+//        location: 'hash',
+//        rootURL: 'index.html'
+//    });
+//}
 //
 //App.BooksRoute = Ember.Route.extend({
 //    model: function () {
@@ -26,32 +32,46 @@ App.Router.map(function () {
 //});
 
 
-App.NewBookController = Ember.ObjectController.extend({
+//App.NewBookController = Ember.ObjectController.extend({
+//    actions: {
+//        submitBook: function (book) {
+//            var bookToSend = this.store.createRecord("book", {
+//                title: book.title,
+//                author: book.author,
+//                year: book.year,
+//                publisher: book.publisher
+//            });
+//
+//            var onSuccess = function (book) {
+//                this.transitionToRoute('books.show', book);
+//            };
+//
+//            var onFail = function (book) {
+//                // deal with the failure here
+//            };
+//
+//            //bookToSend.save().then(onSuccess, onFail);
+//            bookToSend.save();
+//
+//            //alert("Created book " + book.year + " with author " + book.cover + ".");
+//        },
+//        cancelUserCreation: function () {
+//            alert("Canceled user creation.");
+//        }
+//    }
+//});
+
+
+App.SearchController = Ember.Controller.extend({
     actions: {
-        submitBook: function (book) {
-            var bookToSend = this.store.createRecord("book", {
-                title: book.title,
-                author: book.author,
-                year: book.year,
-                publisher: book.publisher
-            });
-
-            var onSuccess = function (book) {
-                this.transitionToRoute('books.show', book);
-            };
-
-            var onFail = function (book) {
-                // deal with the failure here
-            };
-
-            //bookToSend.save().then(onSuccess, onFail);
-            bookToSend.save();
-
-            //alert("Created book " + book.year + " with author " + book.cover + ".");
-        },
-        cancelUserCreation: function () {
-            alert("Canceled user creation.");
+        search: function () {
+            var searchText = this.get("searchText");
+            if (searchText) {
+                this.store.find("book", {order: "title", keyword: searchText});
+                this.set("searchText", "");
+            }
         }
+
     }
 });
 
@@ -62,12 +82,14 @@ App.NewBookFormComponent = Ember.Component.extend({
                 title: this.get('title'),
                 author: this.get('author'),
                 year: this.get('year'),
-                publisher: this.get('publisher'),
-                cover: this.get('cover')
+                publisher: this.get('publisher')
+                //cover: this.get('cover')
             });
+
         }
     }
 });
+
 
 App.BooksRoute = Ember.Route.extend({
     model: function () {
@@ -81,14 +103,11 @@ App.Book = DS.Model.extend({
     author: DS.attr("string"),
     year: DS.attr("number"),
     publisher: DS.attr("string"),
-    isbn: DS.attr("string")
-    //cover: DS.attr("string"),
+    isbn: DS.attr("string"),
+    cover: DS.attr("string")
     //excerpt: DS.attr("string")
 });
 
-//App.Books = DS.Model.extend({
-//    lineItems: DS.hasMany('book')
-//});
 
 App.Book.reopenClass({
     FIXTURES: [
@@ -176,12 +195,7 @@ App.Book.reopenClass({
 //});
 //
 //App.PostController = Ember.ObjectController.extend({
-//  isEditing: false,
-//
-//  actions: {
-//    edit: function() {
-//      this.set('isEditing', true);
-//    },
+//  isEditinmedia-cache-ak0.pinimg.com/736x/c0/63/ef/c063efc82cfc801492beebeae0c7c388    },
 //
 //    doneEditing: function() {
 //      this.set('isEditing', false);

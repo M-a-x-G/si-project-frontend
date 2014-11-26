@@ -1,23 +1,71 @@
 /* Put your CSS here */
 html, body {
-    margin: 20px;
+    background-color: #f0eee1
 }
 
 .undernav {
+    margin-top: 30px;
     padding-top: 30px;
 }
 
 @media (max-width: 768px) {
     .undernav {
         padding-top: 220px;
+        margin-top: 220px;
     }
 }
+
+.book {
+    background-color: #e8e6d9;
+}
+
+.jumbotron{
+    background-color: #e8e6d9;
+}
+
+.bookwormlogo{
+    color: #f0eee1;
+    font-size: xx-large;
+}
+
+.bookwormlogo:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+.bookcontainer:hover .book:not(:hover){
+    opacity: 0.4;
+}
+
+/*.book:hover {*/
+    /*background-color: #fff;*/
+/*}*/
 
 .search {
     width: 75%;
     margin: auto;
 }
 
-.active{
+.coverSize {
+    width: 20%;
+}
+
+.navbar-default{
+    background-color: #7f6257;
+}
+
+.navbar-default .navbar-nav > li {
+    cursor: pointer;
+    background-color: #824d3d;
+    padding: 15px 15px;
+    margin-top: -1px;
+    color: #f0eee1;
     font-weight: bold;
+}
+.navbar-default .navbar-nav > li:hover {
+    background-color: #e87714;
+}
+.navbar-default .navbar-nav > li.active {
+    color: #fff;
+    background-color: #b65a31;
 }

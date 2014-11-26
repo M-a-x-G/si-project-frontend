@@ -2,73 +2,85 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bookworm-Project</title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.css">-->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/libs/jquery-v1.11.1.js"></script>
+    <script src="js/libs/handlebars-v1.3.0.js"></script>
+    <script src="js/libs/ember-v1.8.1.js"></script>
+    <script src="js/libs/ember-data.prod-v1.0.0beta11.js"></script>
+    <script src="js/libs/bootstrap.min-v3.3.0.js"></script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>-->
+    <script src="js/libs/moment.min-v2.8.3.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
-<script type="text/x-handlebars">
+<script type="text/x-handlebars" data-template-name="application">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a>{{#link-to 'index' class='navbar-brand'}}Bookworm{{/link-to}}</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li>{{#link-to 'books'}}Books{{/link-to}}</li>
-                <li>{{#link-to 'search'}}Search Book{{/link-to}}</li>
-                <li>{{#link-to 'new_book'}}Add{{/link-to}}</li>
-                <li>{{#link-to 'about'}}About{{/link-to}}</li>
+        <div class="container">
+            {{#link-to 'index' class='bookwormlogo'}}Bookworm{{/link-to}}
+            <ul class="nav navbar-nav navbar-right">
+                {{#link-to 'books' tagName="li"}}Books{{/link-to}}
+                {{#link-to 'search' tagName="li"}}Search Book{{/link-to}}
+                {{#link-to 'new_book' tagName="li"}}Add{{/link-to}}
+                {{#link-to 'about' tagName="li"}}About{{/link-to}}
             </ul>
         </div>
     </nav>
-    <div class="undernav">
+    <div class="container undernav">
         {{outlet}}
     </div>
 </script>
 
-<script type="text/x-handlebars" id="books">
-    <div class="container-fluid">
-        <div class="span3">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Titel</th>
-                    <th>Author</th>
-                    <th>Year</th>
-                    <th>Publisher</th>
-                    <th>ISBN</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each model}}
-                  {{#link-to 'book' this tagName="tr"}}
-                        <td>{{id}}</td>
-                        <td>{{title}}</td>
-                        <td>{{author}}</td>
-                        <td>{{year}}</td>
-                        <td>{{publisher}}</td>
-                        <td>{{isbn}}</td>
-                    {{/link-to}}
-                {{/each}}
-                </tbody>
-            </table>
+<script type="text/x-handlebars" data-template-name="index">
+    <div class='jumbotron'>
+        <h1>The Bookworm-Project</h1>
 
+        <p>Startpage</p>
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="books">
+    <div class="bookcontainer">
+        {{#each}}
+            <div class="col-lg-3">
+                {{render "book" this}}
+            </div>
+        {{else}}
+            <div class='jumbotron'>
+                <h1>No books added</h1>
+
+                {{#link-to "new_book"}} <p>Click here to add a book.</p> {{/link-to}}
+            </div>
+
+        {{/each}}
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="book">
+
+    <div class="thumbnail book">
+        <img {{bind-attr src='cover' alt="cover"}}/>
+
+        <div class="caption">
+            <h3>{{title}}</h3>
+
+            <p><b>Author:</b> {{author}}<br/></p>
+
+            <p><b>Veröffentlicht: </b>{{year}}<br/></p>
+
+            <p><b>Verlag:</b> {{publisher}}<br/></p>
+
+            <p><b>ISBN:</b> {{isbn}}<br/></p>
         </div>
     </div>
 </script>
 
-<script type="text/x-handlebars" id="book">
-    <h1>{{title}}</h1><br>
-    Author: {{author}}<br/>
-    Veröffentlicht: {{year}}<br/>
-    Verlag: {{publisher}}<br/>
-    ISBN: {{isbn}}<br/>
-</script>
-
-<script type="text/x-handlebars" id="search">
+<script type="text/x-handlebars" data-template-name="search">
 
     <div class="btn-group">
         <div class="btn-group">
@@ -83,46 +95,24 @@
     </div>
 
     <br>
+    <br>
 
-    <div class="col-lg-6">
-        <div class="input-group search">
-            <input type="text" placeholder="Search" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-        </div>
+    <div class="input-group search">
+        {{input valueBinding='searchText' placeholder="Search"  class="form-control"}}
+        <span class="input-group-btn">
+            <button {{action "search" on="click"}} class="btn btn-default" type="button">Go!</button>
+        </span>
     </div>
+    <br>
+    <br>
+
+    <div>
+
     </div>
+
 </script>
 
-<!--<script type="text/x-handlebars" id="new_book">-->
-<!--<form role="form">-->
-<!--<div class="form-group">-->
-<!--<label for="inputTitle">Title</label>-->
-<!--<input type="text" class="form-control" id="inputTitle" placeholder="Enter title">-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<label for="inputAuthor">Author</label>-->
-<!--<input type="text" class="form-control" id="inputAuthor" placeholder="Enter author">-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<label for="inputYear">Year</label>-->
-<!--<input type="text" size="4" maxlength="4" class="form-control" id="inputYear" placeholder="Enter year">-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<label for="inputPublisher">Publisher</label>-->
-<!--<input type="text" class="form-control" id="inputPublisher" placeholder="Enter publisher">-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<label for="coverInputFile">Book cover</label>-->
-<!--<input type="file" id="exampleInputFile">-->
-
-<!--</div>-->
-<!--<button type="submit" class="btn btn-lg">Submit</button>-->
-<!--</form>-->
-<!--</script>-->
-
-<script type="text/x-handlebars" id="new_book">
+<script type="text/x-handlebars" data-template-name="new_book">
     <h1>Add new Book</h1>
     {{new-book-form submit="submitBook" cancel="cancelUserCreation" submitTitle="Add book"}}
 </script>
@@ -142,22 +132,49 @@
         </label></p>
 
         <p><label>Cover<br> {{input type="file"  class="form-control" value=cover}}</label></p>
-        <input type="submit" {{bind-attr value=submitTitle }}>
+        <input type="submit" class="btn-lg"{{bind-attr value=submitTitle }}>
         <!--<button type="submit" class="btn btn-lg">Submit</button>-->
     </form>
 </script>
 
-
-<script type="text/x-handlebars" id="about">
-    <div class="container">
-        <div class='jumbotron'>
-            <h1>The Bookworm-Project</h1>
-
-            <p><i>powered by</i> Sebastian and Max</p>
+<script type="text/x-handlebars" data-template-name="book_table">
+    <div class="container-fluid">
+        <div class="span3">
+            <table class="table table-hover">
+                <!--<thead>-->
+                <!--<tr>-->
+                <!--<th>#</th>-->
+                <!--<th>Titel</th>-->
+                <!--<th>Author</th>-->
+                <!--<th>Year</th>-->
+                <!--<th>Publisher</th>-->
+                <!--<th>ISBN</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <tbody>
+                {{#each}}
+                    {{#link-to 'book' this tagName="tr"}}
+                        <td>{{id}}</td>
+                        <td>{{title}}</td>
+                        <td>{{author}}</td>
+                        <td>{{year}}</td>
+                        <td>{{publisher}}</td>
+                        <td>{{isbn}}</td>
+                    {{/link-to}}
+                {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 </script>
 
+<script type="text/x-handlebars" data-template-name="about">
+    <div class='jumbotron'>
+        <h1>The Bookworm-Project</h1>
+
+        <p><i>powered by</i> Sebastian and Max</p>
+    </div>
+</script>
 
 <script type="text/x-handlebars" data-template-name="cover">
     <div class="col-md-3 col-xs-12">
@@ -167,49 +184,5 @@
     <img {{bind-attr src=controller.Url}}>
 </script>
 
-<script type="text/x-handlebars"  data-template-name="book_table">
-    <div class="container-fluid">
-        <div class="span3">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Titel</th>
-                    <th>Author</th>
-                    <th>Year</th>
-                    <th>Publisher</th>
-                    <th>ISBN</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each model}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>{{title}}</td>
-                        <td>{{author}}</td>
-                        <td>{{year}}</td>
-                        <td>{{publisher}}</td>
-                        <td>{{isbn}}</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-</script>
-
-
-
-
-
-<script src="js/libs/jquery-v1.11.1.js"></script>
-<script src="js/libs/handlebars-v1.3.0.js"></script>
-<script src="js/libs/ember-v1.8.1.js"></script>
-<script src="js/libs/ember-data.prod-v1.0.0beta11.js"></script>
-<script src="js/libs/bootstrap.min-v3.3.0.js"></script>
-<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>-->
-<script src="js/libs/moment.min-v2.8.3.js"></script>
-<script src="js/app.js"></script>
 </body>
 </html>

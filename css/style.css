@@ -1,0 +1,23 @@
+/* Put your CSS here */
+html, body {
+    margin: 20px;
+}
+
+.undernav {
+    padding-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .undernav {
+        padding-top: 220px;
+    }
+}
+
+.search {
+    width: 75%;
+    margin: auto;
+}
+
+.active{
+    font-weight: bold;
+}

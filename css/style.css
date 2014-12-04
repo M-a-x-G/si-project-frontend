@@ -19,6 +19,10 @@ html, body {
     background-color: #e8e6d9;
 }
 
+.searchSelect{
+    text-align: center;
+}
+
 .jumbotron{
     background-color: #e8e6d9;
 }

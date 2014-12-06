@@ -37,13 +37,6 @@
     </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="index">
-    <div class='jumbotron'>
-        <h1>The Bookworm-Project</h1>
-
-        <p>Startpage</p>
-    </div>
-</script>
 
 <script type="text/x-handlebars" data-template-name="books">
     <div class="bookcontainer">
@@ -99,46 +92,43 @@
     <br>
     <br>
 
-    <div>
-        {{model}}
+    <div class="bookcontainer">
         {{#each}}
-            {{title}}
+            <div class="col-lg-3">
+                {{render "book" this}}
+            </div>
+        {{else}}
+            <h1>No books found</h1>
+
+            <p>There are is no book that matches your query.</p>
 
         {{/each}}
     </div>
 
 </script>
 
-<script type="text/x-handlebars" data-template-name="search/result">
-    {{#each result}}
-        {{title}}
-        {{author}}
-    {{else}}
-        {{#if hasNoElements}}
-            <div class='jumbotron'>
-                <h1>No books found</h1>
-
-                <p>There are is no book that matches your query this.</p>
-            </div>{{/if}}
-    {{/each}}
-
-</script>
 
 <script type="text/x-handlebars" data-template-name="new_book">
     <h1>Add new Book</h1>
 
     <form role="form" {{action "submitBook" on="submit"}}>
-        <p><label>Title<br> {{input type="text" placeholder="Enter title" class="form-control" value=title}}</label></p>
-
-        <p><label>Author<br> {{input type="text" placeholder="Enter author" class="form-control" value=author}}</label>
+        <p>
+            <label>Title<br> {{input type="text" placeholder="Enter title" class="form-control" value=title}}</label>
         </p>
 
         <p>
-            <label>Year<br> {{input type="text" size="4" maxlength="4" placeholder="year" class="form-control" value=year}}
-            </label></p>
+            <label>Author<br> {{input type="text" placeholder="Enter author" class="form-control" value=author}}</label>
+        </p>
 
-        <p><label>Publisher<br> {{input type="text" placeholder="Enter publisher" class="form-control" value=publisher}}
-        </label></p>
+        <p>
+            <label>Year<br> {{input type="text" size="4" maxlength="4" placeholder="YYYY" class="form-control" value=year}}
+            </label>
+        </p>
+
+        <p>
+            <label>Publisher<br> {{input type="text" placeholder="Enter publisher" class="form-control" value=publisher}}
+            </label>
+        </p>
 
         <p><label>Cover<br> {{image-upload url="http://localhost:8080/upload" value=cover}}</label></p>
         <input type="submit" class="btn-lg" value="Submit Book">
@@ -146,40 +136,10 @@
     </form>
 </script>
 
-<!--<script type="text/x-handlebars" data-template-name="components/new-book-form">-->
-<!--<form role="form" {{action "submit" on="submit"}}>-->
-<!--<p><label>Title<br> {{input type="text" placeholder="Enter title" class="form-control" value=title}}</label></p>-->
-
-<!--<p><label>Author<br> {{input type="text" placeholder="Enter author" class="form-control" value=author}}</label>-->
-<!--</p>-->
-
-<!--<p>-->
-<!--<label>Year<br> {{input type="text" size="4" maxlength="4" placeholder="year" class="form-control" value=year}}-->
-<!--</label></p>-->
-
-<!--<p><label>Publisher<br> {{input type="text" placeholder="Enter publisher" class="form-control" value=publisher}}-->
-<!--</label></p>-->
-
-<!--<p><label>Cover<br> {{image-upload class="form-control" value=cover}}</label></p>-->
-<!--<input type="submit" class="btn-lg"{{bind-attr value=submitTitle }}>-->
-<!--&lt;!&ndash;<button type="submit" class="btn btn-lg">Submit</button>&ndash;&gt;-->
-<!--</form>-->
-<!--</script>-->
-
 <script type="text/x-handlebars" data-template-name="book_table">
     <div class="container-fluid">
         <div class="span3">
             <table class="table table-hover">
-                <!--<thead>-->
-                <!--<tr>-->
-                <!--<th>#</th>-->
-                <!--<th>Titel</th>-->
-                <!--<th>Author</th>-->
-                <!--<th>Year</th>-->
-                <!--<th>Publisher</th>-->
-                <!--<th>ISBN</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
                 <tbody>
                 {{#each}}
                     {{#link-to 'book' this tagName="tr"}}
@@ -201,14 +161,6 @@
 
         <p><i>powered by</i> Sebastian and Max</p>
     </div>
-</script>
-
-<script type="text/x-handlebars" data-template-name="cover">
-    <div class="col-md-3 col-xs-12">
-        <label>Image location: </label>
-        {{input type="text" placeholder="Url" value=controller.Url class="form-control"}}
-    </div>
-    <img {{bind-attr src=controller.Url}}>
 </script>
 
 </body>

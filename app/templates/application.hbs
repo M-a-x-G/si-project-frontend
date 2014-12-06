@@ -1,3 +1,14 @@
-<h2 id='title'>Welcome to Ember.js</h2>
-
-{{outlet}}
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      {{#link-to 'index' class='bookwormlogo'}}Bookworm{{/link-to}}
+        <ul class="nav navbar-nav navbar-right">
+          {{#link-to 'books' tagName="li"}}Books{{/link-to}}
+          {{#link-to 'search' tagName="li"}}Search Book{{/link-to}}
+          {{#link-to 'new_book' tagName="li"}}Add{{/link-to}}
+          {{#link-to 'about' tagName="li"}}About{{/link-to}}
+        </ul>
+    </div>
+</nav>
+<div class="container undernav">
+  {{outlet}}
+</div>

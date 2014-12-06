@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="span3">
+        <table class="table table-hover">
+            <tbody>
+            {{#each}}
+              {{#link-to 'book' this tagName="tr"}}
+                  <td>{{title}}</td>
+                  <td>{{author}}</td>
+                  <td>{{year}}</td>
+                  <td>{{publisher}}</td>
+              {{/link-to}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

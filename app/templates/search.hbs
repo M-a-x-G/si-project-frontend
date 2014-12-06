@@ -1,0 +1,30 @@
+<div class="input-group">
+  {{input valueBinding='searchText' placeholder="Search"  class="form-control"}}
+    <div class="input-group-btn">
+        <button type="button" class="btn btn-default" {{action "search" on="click" }}>Search {{key}}</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li><a {{action "select" "title"}}>Search title</a></li>
+            <li><a {{action "select" "author"}}>Search author</a></li>
+            <li><a {{action "select" "year"}}>Search year</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="bookcontainer">
+  {{#each}}
+      <div class="col-lg-3">
+        {{one-book book=this}}
+      </div>
+  {{else}}
+      <div class='jumbotron'>
+          <h1>No books found</h1>
+
+          <p>There are is no book that matches your query.</p>
+      </div>
+  {{/each}}
+</div>

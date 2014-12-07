@@ -14,8 +14,9 @@ html, body {
   }
 }
 
-.book {
-  background-color: #e8e6d9;
+.navbar-right{
+  margin: 0;
+
 }
 
 .search-select {
@@ -120,4 +121,16 @@ html, body {
 
 .btn-lg{
   width: 98%;
+}
+
+.cover{
+  width: 99%;
+}
+
+.book-text{
+  margin-top: 3%;
+}
+
+.book {
+  background-color: #e8e6d9;
 }

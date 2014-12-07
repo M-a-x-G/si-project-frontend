@@ -25,6 +25,8 @@ app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.t
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {destDir: 'fonts'});
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {destDir: 'fonts'});
 app.import('bower_components/selectize/dist/js/standalone/selectize.js');
+app.import('bower_components/selectize/dist/css/selectize.css');
+app.import('bower_components/selectize/dist/css/selectize.bootstrap3.css');
 app.import('bower_components/dropzone/downloads/dropzone.js');
 app.import('bower_components/jquery-file-upload/js/jquery.fileupload.js');
 module.exports = app.toTree();

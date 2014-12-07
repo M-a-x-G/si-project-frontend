@@ -11,8 +11,10 @@
                 </label>
 
                 <p>
-                    <label class="full-size">Author<br> {{input type="text" placeholder="Enter author" class="form-control authors" value=authors }}
+                <div class="control-group">
+                    <label class="full-size">Author<br> {{input id="authors" type="text" placeholder="Enter author" class="form-control" value=authors }}
                     </label>
+                </div>
                 </p>
 
                 <p>
@@ -39,6 +41,5 @@
                 </div>
             </div>
         </form>
-        <input class="full-size" {{action "selectiz"}} type="text" id="authors">
     </div>
 </div>

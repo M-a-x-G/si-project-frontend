@@ -5,23 +5,9 @@ export default Ember.Controller.extend({
   url: "",
   uploadstatus: "",
   actions: {
-    selectiz: function () {
-      var autho = Ember.$("#authors");
-
-      autho.selectize({
-        plugins: ['remove_button'],
-        delimiter: ',',
-        persist: false,
-        create: function (input) {
-          return {
-            value: input,
-            text: input
-          };
-        }
-      });
-    },
     submitBook: function () {
       var self = this;
+
       this.set("uploadstatus", "uploading");
 
 

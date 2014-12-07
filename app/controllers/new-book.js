@@ -1,26 +1,71 @@
 import Ember from 'ember';
 
+
 export default Ember.Controller.extend({
   url: "",
+  uploadstatus: "",
   actions: {
+    selectiz: function () {
+      var autho = Ember.$("#authors");
+
+      autho.selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: function (input) {
+          return {
+            value: input,
+            text: input
+          };
+        }
+      });
+    },
     submitBook: function () {
       var self = this;
+      this.set("uploadstatus", "uploading");
+
+
       var book = this.store.createRecord('book', {
         title: this.get('title'),
-        author: this.get('author'),
+        author: this.get('authors'),
         year: this.get('year'),
         publisher: this.get('publisher')
       });
 
+
       var onSuccess = function (book) {
         var uuid = book.get('id');
-        this.set("title", "");
-        this.set("author", "");
-        this.set("year", "");
-        this.set("publisher", "");
-        self.transitionToRoute("books");
-      };
+        var coverInput = self.get("cover");
+        var fileList = self.get("fileupload");
+        self.set("uploadstatus", "dto done");
+        self.set("title", "");
+        self.set("authors", "");
+        self.set("year", "");
+        self.set("publisher", "");
 
+        self.set("uploadstatus", "start image");
+        var jqXHR = Ember.$("#fileupload").fileupload(
+          'send',
+          {
+            files: filesList,
+            url: 'http://localhost:8080/rest/v1/coverupload?uuid='+uuid,
+            sequentialUploads: true,
+            dataType: 'json',
+            formData: {script: true}
+          }
+        ).success(function (result, textStatus, jqXHR) {
+            self.set("uploadstatus", "success");
+          })
+          .error(function (jqXHR, textStatus, errorThrown) {/* ... */
+          })
+          .complete(function (result, textStatus, jqXHR) {/* ... */
+          });
+        //
+        //
+        //
+        //  self.transitionToRoute("books");
+      };
+      //
       var onFail = function (book) {
         alert("fail ");
       };

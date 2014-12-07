@@ -1,5 +1,5 @@
 html, body {
-  background-color: #f0eee1
+  background-color: #f0eee1;
 }
 
 .undernav {
@@ -18,7 +18,7 @@ html, body {
   background-color: #e8e6d9;
 }
 
-.searchSelect{
+.search-select {
   text-align: center;
 }
 
@@ -53,6 +53,10 @@ html, body {
   width: 20%;
 }
 
+.branding-background-color{
+  color: #f0eee1;
+}
+
 .navbar-default{
   background-color: #7f6257;
 }
@@ -71,4 +75,49 @@ html, body {
 .navbar-default .navbar-nav > li.active {
   color: #fff;
   background-color: #b65a31;
+}
+
+.bar{
+  height: 18px;
+  background: #b65a31;
+}
+
+.full-size{
+  width: 98%;
+}
+
+.cover-upload{
+  padding-top: 14%;
+}
+
+.cover-upload-body{
+  height: 294px;
+  background-color: #f0eee1;
+}
+
+.hint-text-color{
+  color: #ccc;
+}
+
+.panel-heading{
+  background-color: #7f6257 !important;
+}
+
+.button-coloring{
+  background-color: #824d3d;
+  color: #f0eee1;
+  border-top-color: #d0cebf;
+  border-left-color: #d0cebf;
+  border-bottom-color: #ac8c7e;
+  border-right-color: #ac8c7e;
+}
+
+.new-book{
+  margin-right: 20%;
+  margin-left: 20%;
+  background-color: #e8e6d9;
+}
+
+.btn-lg{
+  width: 98%;
 }

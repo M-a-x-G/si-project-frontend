@@ -7,7 +7,6 @@ export default Ember.ArrayController.extend({
   actions: {
     select: function (id) {
       this.set("key", id);
-
     },
 
     search: function () {

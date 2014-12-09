@@ -3,14 +3,15 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   url: "",
-  uploadstatus: "",
+  submitCover: null,
   actions: {
+
+    saveFile: function(cover){
+      this.set("submitCover", cover);
+    },
+
     submitBook: function () {
       var self = this;
-
-      this.set("uploadstatus", "uploading");
-
-
       var book = this.store.createRecord('book', {
         title: this.get('title'),
         author: this.get('authors'),
@@ -29,20 +30,17 @@ export default Ember.Controller.extend({
         self.set("year", "");
         self.set("publisher", "");
 
-        self.set("uploadstatus", "start image");
-        var jqXHR = Ember.$("#fileupload").fileupload(
-          'send',
+        Ember.$("#coverupload").fileupload(
           {
-            files: filesList,
-            url: 'http://localhost:8080/rest/v1/coverupload?uuid='+uuid,
-            sequentialUploads: true,
-            dataType: 'json',
-            formData: {script: true}
+            url: 'http://localhost:8080/rest/v1/coverupload?uuid=' + uuid
           }
-        ).success(function (result, textStatus, jqXHR) {
-            self.set("uploadstatus", "success");
-          })
+        );
+        var jqXHR = self.get("submitCover").submit().
+        success(function (result, textStatus, jqXHR) {
+          alert("success");
+        })
           .error(function (jqXHR, textStatus, errorThrown) {/* ... */
+            alert("eorro");
           })
           .complete(function (result, textStatus, jqXHR) {/* ... */
           });

@@ -28,6 +28,14 @@ app.import('bower_components/selectize/dist/js/standalone/selectize.js');
 app.import('bower_components/selectize/dist/css/selectize.css');
 app.import('bower_components/selectize/dist/css/selectize.bootstrap3.css');
 app.import('bower_components/dropzone/downloads/dropzone.js');
+app.import('bower_components/jquery-file-upload/js/vendor/jquery.ui.widget.js');
 app.import('bower_components/jquery-file-upload/js/jquery.fileupload.js');
+app.import('bower_components/jquery-file-upload/js/jquery.fileupload-process.js');
+app.import('bower_components/jquery-file-upload/js/jquery.fileupload-validate.js');
+app.import('bower_components/jquery-file-upload/js/jquery.fileupload-image.js');
+app.import('bower_components/jquery-file-upload/css/jquery.fileupload-noscript.css');
+app.import('bower_components/jquery-file-upload/css/jquery.fileupload.css');
+app.import('bower_components/jquery-file-upload/css/jquery.fileupload-ui.css');
+app.import('bower_components/jquery-file-upload/css/jquery.fileupload-ui-noscript.css');
 module.exports = app.toTree();
 

@@ -1,12 +1,33 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
+function isValidString(string){
+  return string && string !== "";
 
-export default Ember.Controller.extend({
-  url: "",
+}
+
+export default Ember.Controller.extend(EmberValidations.Mixin, {
+  //validations: {
+  //  title: {
+  //    presence: true,
+  //    length: {minimum: 5}
+  //  },
+  //  author :{
+  //    presence: true,
+  //    length: {minimum: 5}
+  //  },
+  //  year: {
+  //    numericality: true
+  //    //format: { with: /({3}[0-9])({4})/, allowBlank: true, message: 'must be years only'  }
+  //  }
+  //
+  //},
+  yearVal: function(){ var year = this.get("year");
+    return year && year !== "";}.property("year"),
   submitCover: null,
   actions: {
 
-    saveFile: function(cover){
+    saveFile: function (cover) {
       this.set("submitCover", cover);
     },
 
@@ -36,9 +57,9 @@ export default Ember.Controller.extend({
         );
 
         self.get("submitCover").submit().
-        success(function (result, textStatus, jqXHR) { // jshint ignore:line
-          alert("success");
-        })
+          success(function (result, textStatus, jqXHR) { // jshint ignore:line
+            alert("success");
+          })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
             alert("eorro");
           })

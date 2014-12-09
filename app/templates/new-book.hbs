@@ -3,43 +3,68 @@
         <form role="form" {{action "submitBook" on="submit"}}>
             <div class="book-upload col-md-6">
                 <h1>Add new Book</h1>
-                <label class="full-size">Title<br> {{input type="text" placeholder="Enter title" class="form-control" value=title}}
-                </label>
 
-                <p>
 
-                <div class="control-group">
-                    <label class="full-size">Author<br> {{input id="authors" type="text" placeholder="Enter author" class="form-control" value=authors }}
-                    </label>
+                <div class="form-group has-feedback">
+                    <label class="control-label" for="title">Title</label>
+                  {{input type="text" id="title" placeholder="Enter title" class="form-control" value=title aria-describedby="titleStatus"}}
+                  {{#if title}}
+                      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                      <span id="titleStatus" class="sr-only">(success)</span>
+                  {{else}}
+                      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                      <span id="titleStatus" class="sr-only">(error)</span>
+                  {{/if}}
                 </div>
 
-                <p>
-                    <label class="full-size">Publisher<br> {{input type="text" placeholder="Enter publisher" class="form-control" value=publisher}}
-                    </label>
-                </p>
+                <div {{bind-attr class="authors:has-success:has-warning"}} class="form-group">
+                    <label class="control-label" for="authors">Authors</label>
+                  {{input id="authors" type="text" placeholder="Enter author" class="form-control" value=authors aria-describedby="authorsStatus"}}
+                </div>
 
-                <p>
-                    <label class="full-size">Year<br> {{input type="text" size="4" maxlength="4" placeholder="YYYY" class="form-control" value=year}}
-                    </label>
-                </p>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label" for="publisher">Publisher</label>
+                  {{input type="text" placeholder="Enter publisher" class="form-control" value=publisher aria-describedby="publisherStatus"}}
+                  {{#if publisher}}
+                      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                      <span id="publisherStatus" class="sr-only">(success)</span>
+                  {{else}}
+                      <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+                      <span id="publisherStatus" class="sr-only">(warning)</span>
+                  {{/if}}
+                </div>
+
+
+                <div class="form-group has-feedback">
+                    <label class="control-label" for="year">Year</label>
+                  {{input type="text" size="4" maxlength="4" placeholder="Enter year" class="form-control" value=year aria-describedby="yearStatus"}}
+                  {{#if yearVal}}
+                      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                      <span id="yearStatus" class="sr-only">(success)</span>
+                  {{else}}
+                      <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+                      <span id="yearStatus" class="sr-only">(warning)</span>
+                  {{/if}}
+                </div>
+
                 <input type="submit" class="btn-lg button-coloring" value="Submit Book">
             </div>
         </form>
-            <div class="cover-upload col-md-6">
-                <div class="panel panel-default cover-upload-body">
-                    <div class="panel-heading">
-                        <h3 class="panel-title branding-background-color">Cover</h3>
-                    </div>
-                    <div class="panel-body">
+        <div class="cover-upload col-md-6">
+            <div class="panel panel-default cover-upload-body">
+                <div class="panel-heading">
+                    <h3 class="panel-title branding-background-color">Cover</h3>
+                </div>
+                <div id="dropzone" class="panel-body fade well">
                        <span class="btn btn-success fileinput-button">
                           <i class="glyphicon glyphicon-plus"></i>
                           <span>Add files...</span>
                           <input id="coverupload" type="file" name="file">
                        </span>
 
-                    </div>
                 </div>
             </div>
+        </div>
     </div>
-
 </div>

@@ -5,7 +5,7 @@ export default Ember.ArrayController.extend({
   key: "title",
   value: "",
   isSearched: function(){
-    return this.get("value") != "" && this.get("title") != "";
+    return this.get("value") !== "" && this.get("title") !== "";
   }.property("key", "value"),
   actions: {
     select: function (id) {

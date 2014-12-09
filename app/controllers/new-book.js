@@ -22,8 +22,7 @@ export default Ember.Controller.extend({
 
       var onSuccess = function (book) {
         var uuid = book.get('id');
-        var coverInput = self.get("cover");
-        var fileList = self.get("fileupload");
+
         self.set("uploadstatus", "dto done");
         self.set("title", "");
         self.set("authors", "");
@@ -35,7 +34,7 @@ export default Ember.Controller.extend({
             url: 'http://localhost:8080/rest/v1/coverupload?uuid=' + uuid
           }
         );
-        var jqXHR = self.get("submitCover").submit().
+        self.get("submitCover").submit().
         success(function (result, textStatus, jqXHR) {
           alert("success");
         })

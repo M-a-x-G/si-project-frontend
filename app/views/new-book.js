@@ -8,7 +8,7 @@ export default Ember.View.extend({
     Ember.run.scheduleOnce('afterRender', this, function () {
       Ember.$("#authors").selectize({
         plugins: ['remove_button', 'restore_on_backspace'],
-        delimiter: ',',
+        delimiter: ';',
         persist: false,
         create: function (input) {
           return {

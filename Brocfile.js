@@ -27,7 +27,6 @@ app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.w
 app.import('bower_components/selectize/dist/js/standalone/selectize.js');
 app.import('bower_components/selectize/dist/css/selectize.css');
 app.import('bower_components/selectize/dist/css/selectize.bootstrap3.css');
-app.import('bower_components/dropzone/downloads/dropzone.js');
 app.import('bower_components/jquery-file-upload/js/vendor/jquery.ui.widget.js');
 app.import('bower_components/jquery-file-upload/js/jquery.fileupload.js');
 app.import('bower_components/jquery-file-upload/js/jquery.fileupload-process.js');

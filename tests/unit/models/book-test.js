@@ -1,3 +1,5 @@
+import DS from 'ember-data';
+import Ember from 'ember';
 import {
   moduleForModel,
   test
@@ -8,8 +10,9 @@ moduleForModel('book', 'Book', {
   needs: []
 });
 
-test('it exists', function() {
-  var model = this.subject();
-  // var store = this.store();
-  ok(!!model);
+test('Book is a valid ember-data model', function() {
+  //var store = this.store();
+  var book = this.subject({title: "Ember-qunit test book", author:"Max", year: 2014, publisher: "SeMa Projects", coverPage:"127.0.0.1/home"});
+  ok(book);
+  ok(book instanceof DS.Model);
 });

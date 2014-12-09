@@ -34,14 +34,15 @@ export default Ember.Controller.extend({
             url: 'http://localhost:8080/rest/v1/coverupload?uuid=' + uuid
           }
         );
+
         self.get("submitCover").submit().
-        success(function (result, textStatus, jqXHR) {
+        success(function (result, textStatus, jqXHR) { // jshint ignore:line
           alert("success");
         })
-          .error(function (jqXHR, textStatus, errorThrown) {/* ... */
+          .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
             alert("eorro");
           })
-          .complete(function (result, textStatus, jqXHR) {/* ... */
+          .complete(function (result, textStatus, jqXHR) {// jshint ignore:line
           });
         //
         //
@@ -49,7 +50,7 @@ export default Ember.Controller.extend({
         //  self.transitionToRoute("books");
       };
       //
-      var onFail = function (book) {
+      var onFail = function () {
         alert("fail ");
       };
 
@@ -57,3 +58,4 @@ export default Ember.Controller.extend({
     }
   }
 });
+

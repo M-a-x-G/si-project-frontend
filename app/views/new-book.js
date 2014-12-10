@@ -30,7 +30,7 @@ export default Ember.View.extend({
           dataType: 'text',
           //formData: {script: true},
           acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
-          maxFileSize: 5000000, // 5MB
+          maxFileSize: 2500000, // 2.5MB
           add: function (e, data) {
             self.get('controller').send("saveFile", data);
           }

@@ -119,16 +119,36 @@ html, body {
   background-color: #e8e6d9;
 }
 
+.btn-remove{
+  color: darkred;
+  background-color: #f0eee1;
+  display: inline;
+  margin-left: 80px;
+}
+
+.inline{
+  display: inline;
+}
 .btn-lg{
-  width: 98%;
+  width: 100%;
 }
 
 .cover{
   width: 99%;
 }
 
+
 .book-text{
   margin-top: 2%;
+}
+
+.cover-image{
+  width: 100%;
+  height: auto;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-bottomright: 3px;
 }
 
 .book {

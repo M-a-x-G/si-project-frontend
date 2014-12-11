@@ -1,7 +1,7 @@
 <div class="input-group">
-  {{input valueBinding='searchText' placeholder="Search"  class="form-control"}}
+  {{input id="search-field" valueBinding='searchText' placeholder="Search"  class="form-control"}}
     <div class="input-group-btn">
-        <button type="button" class="btn btn-default" {{action "search" on="click" }}>Search {{key}}</button>
+        <button type="button" class="btn btn-default" {{action "search" on="click" }}>Search {{searchButtonText}}</button>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <span class="caret"></span></button>
 

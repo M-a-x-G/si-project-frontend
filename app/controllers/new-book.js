@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
-function isImage(filename) {
-  var type = filename.split('.').pop();
+function isValidImage(file) {
+  var type = file.name.split('.').pop().toLowerCase();
 
-  if (type) {
+  if (type && file.size <= 2500000) {
     return /(gif|jpe?g|png|bmp)/.exec(type);
   } else {
     return false;
@@ -23,10 +23,11 @@ export default Ember.Controller.extend({
       this.set("submitCover", null);
       $("#cover-image").remove();// jshint ignore:line
       $("#remove-cover").addClass("hidden");// jshint ignore:line
+      $("#dropzone-border").removeClass("hidden");// jshint ignore:line
     },
 
     saveFile: function (cover) {
-      if (isImage(cover.files[0].name)) {
+      if (isValidImage(cover.files[0])) {
         this.set("submitCover", cover);
         $("#cover-image").remove();// jshint ignore:line
         var URL = window.URL || window.webkitURL,
@@ -58,6 +59,7 @@ export default Ember.Controller.extend({
             // *finally*, set the src attribute of the new image to our image
             .attr('src', imageUrl);
           $("#remove-cover").removeClass("hidden");// jshint ignore:line
+          $("#dropzone-border").addClass("hidden");// jshint ignore:line
         }
       }
     },
@@ -90,7 +92,7 @@ export default Ember.Controller.extend({
 
         self.get("submitCover").submit().
           success(function (result, textStatus, jqXHR) { // jshint ignore:line
-            alert("success");
+            //alert("success");
           })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
             self.transitionTo("servererror");

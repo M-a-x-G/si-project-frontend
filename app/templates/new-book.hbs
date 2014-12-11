@@ -58,7 +58,7 @@
                     <button {{action "removeCover"}} id="remove-cover" type="button" class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
                 </div>
                 <div id="dropzone" class="panel-body fade well">
-                      <div class="dropzone-border">{{#if submitCover}}
+                      <div id="dropzone-border" class="dropzone-border">{{#if submitCover}}
                       {{else}}
                        <label for="coverupload" class="btn btn-success fileinput-button">
                            select cover

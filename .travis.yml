@@ -18,3 +18,10 @@ install:
 
 script:
   - npm test
+
+deploy:
+  provider: s3
+  access_key_id: username
+  secret_access_key: s3password
+  bucket: "muegregorproject"
+  skip_cleanup: true

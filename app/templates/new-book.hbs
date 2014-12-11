@@ -55,17 +55,17 @@
             <div class="panel panel-default cover-upload-body">
                 <div class="panel-heading cover-heading">
                    <p class="inline panel-title branding-background-color">Cover (max 2.5MB)</p>
-                    <button {{action "removeCover"}} id="remove-cover" type="button" class="hidden btn btn-default btn-remove glyphicon glyphicon-trash">
+                    <button {{action "removeCover"}} id="remove-cover" type="button" class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
                 </div>
                 <div id="dropzone" class="panel-body fade well">
-                      {{#if submitCover}}
+                      <div class="dropzone-border">{{#if submitCover}}
                       {{else}}
-                       <span class="btn btn-success fileinput-button">
-                          <i class="glyphicon glyphicon-plus"></i>
+                       <label for="coverupload" class="btn btn-success fileinput-button">
+                           select cover
                           <input id="coverupload" type="file" name="file">
-                       </span>
+                       </label>
                       {{/if}}
-
+                      </div>
                 </div>
             </div>
         </div>

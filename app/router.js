@@ -10,6 +10,10 @@ Router.map(function () {
   this.route('new_book');
   this.resource('search');
   this.route('about');
+  this.route('serverunavailable');
+  this.route('servererror');
+  this.route('notfound');
+  this.route('notfound', { path: "/*path" });
 });
 
 export default Router;

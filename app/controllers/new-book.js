@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
             alert("success");
           })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
-            alert("eorro");
+            self.transitionTo("servererror");
           })
           .complete(function (result, textStatus, jqXHR) {// jshint ignore:line
           });
@@ -104,7 +104,7 @@ export default Ember.Controller.extend({
       };
       //
       var onFail = function () {
-        alert("fail ");
+        self.transitionTo("serverunavailable");
       };
 
       book.save().then(onSuccess, onFail);

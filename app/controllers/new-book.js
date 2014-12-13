@@ -132,7 +132,6 @@ export default Ember.Controller.extend({
             removeCover(self);
             removeInputs(self);
             showSuccessAlert();
-            debugger;
             var resultJson = JSON && JSON.parse(result) || Ember.$.parseJSON(result);
             self.store.push('book', {
               id: resultJson.id,

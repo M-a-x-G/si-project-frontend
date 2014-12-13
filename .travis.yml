@@ -21,7 +21,10 @@ script:
 
 deploy:
   provider: s3
-  access_key_id: username
-  secret_access_key: s3password
-  bucket: "muegregorproject"
+  access_key_id: $username
+  secret_access_key: $s3password
+  bucket: $bucket
   skip_cleanup: true
+  on:
+      branch: master
+      condition: $deploy = yes

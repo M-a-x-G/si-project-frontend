@@ -16,6 +16,9 @@ install:
   - npm install
   - bower install
 
+before_deploy:
+  - ember build --environment="production"
+
 script:
   - npm test
 
@@ -25,6 +28,7 @@ deploy:
   secret_access_key: $s3password
   bucket: $bucket
   skip_cleanup: true
+  local-dir: dist
   on:
       branch: master
       condition: $deploy = yes

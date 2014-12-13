@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  data: null,
   didInsertElement: function () {
     this._super();
     var self = this;
@@ -19,7 +18,7 @@ export default Ember.View.extend({
       });
       Ember.$("#coverupload").fileupload(
         {
-          url: 'http://localhost:8080/rest/v1/coverupload?uuid=lol',
+          url: 'http://localhost:8080/rest/v1/coverupload',
           dropZone: Ember.$('#dropzone'),
           // Enable image resizing, except for Android and Opera,
           // which actually support image resizing, but fail to

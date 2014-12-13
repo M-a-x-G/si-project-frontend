@@ -231,3 +231,38 @@ html, body {
   0% { -ms-transform: rotate(0deg);}
   100% { -ms-transform: rotate(360deg);}
 }
+
+.overlay{
+  text-align: center;
+  position: absolute;
+  width: 200px;
+  transition: all .5s;
+  background: rgba(255,0,0,0); /* Only make the background opaque and not the text */
+  /*top: 10px; *//*padding size*/
+  /*left: 10px; *//*padding size*/
+  overflow: hidden;
+  height: 0; /* height 0 will give a rolling transition to 100% on hover */
+}
+
+.btn-remove-book{
+  color: darkred;
+  background-color: #f0eee1;
+  margin-top: 2%;
+  opacity: 0.4;
+}
+
+.btn-remove-book:hover{
+  color: darkred;
+  background-color: #f0eee1;
+  margin-top: 2%;
+  opacity: 0.9;
+}
+
+
+.remove-overflow{
+  position: absolute;
+  width: 100%;
+  text-align: end;
+  padding-right: 19%;
+
+}

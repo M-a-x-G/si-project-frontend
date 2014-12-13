@@ -10,6 +10,44 @@ function isValidImage(file) {
   }
 }
 
+function alertTimeout(wait) {
+  setTimeout(function () {
+    Ember.$('#alert-container').children('.alert:last-child').remove();
+  }, wait);
+}
+
+function showSuccessAlert(message) {
+  Ember.$("#alert-container").append(
+    '<div class="alert alert-success alert-dismissible" role="alert">' +
+    '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+    (message === ""? message : "<strong>Great</strong> Book was added correctly.") + "</div>"
+  );
+  alertTimeout(3500);
+}
+
+function showFailAlert(message) {
+  Ember.$("#alert-container").append(
+    '<div class="alert alert-danger alert-dismissible" role="alert">' +
+    '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+    (message !== "" ? message : "<strong>Oh no!</strong> An error occurred on upload. (no network connection?)") + "</div>"
+  );
+  alertTimeout(3500);
+}
+
+function removeCover(controller) {
+  controller.set("submitCover", null);
+  $("#cover-image").remove();// jshint ignore:line
+  $("#remove-cover").addClass("hidden");// jshint ignore:line
+  $("#dropzone-border").removeClass("hidden");// jshint ignore:line
+}
+
+function removeInputs(controller) {
+  controller.set("title", "");
+  controller.set("publisher", "");
+  controller.set("year", "");
+  Ember.$("#authors")[0].selectize.clear();
+}
+
 export default Ember.Controller.extend({
   yearVal: function () {
     var year = this.get("year");
@@ -20,15 +58,14 @@ export default Ember.Controller.extend({
   actions: {
 
     removeCover: function () {
-      this.set("submitCover", null);
-      $("#cover-image").remove();// jshint ignore:line
-      $("#remove-cover").addClass("hidden");// jshint ignore:line
-      $("#dropzone-border").removeClass("hidden");// jshint ignore:line
+      removeCover(this);
     },
 
     saveFile: function (cover) {
-      if (isValidImage(cover.files[0])) {
+
+      if (cover && isValidImage(cover.files[0])) {
         this.set("submitCover", cover);
+
         $("#cover-image").remove();// jshint ignore:line
         var URL = window.URL || window.webkitURL,
           imageUrl,
@@ -53,6 +90,7 @@ export default Ember.Controller.extend({
 
             // if there was an error loading the image, react accordingly
             .error(function () {
+              showFailAlert("<strong>Oh no!</strong> Error while loading image.");
               // notify the user that the image could not be loaded
             })
 
@@ -64,52 +102,45 @@ export default Ember.Controller.extend({
       }
     },
 
-
     submitBook: function () {
       var self = this;
-      var book = this.store.createRecord('book', {
-        title: this.get('title'),
-        author: this.get('authors'),
-        year: this.get('year'),
-        publisher: this.get('publisher')
-      });
+      var title = this.get('title');
+      var authors = this.get('authors');
+      var year = this.get('year');
+      var publisher = this.get('publisher');
 
+      if (!title || title === "") {
+        showFailAlert("<strong>Simply no</strong>");
+        return;
+      }
 
-      var onSuccess = function (book) {
-        var uuid = book.get('id');
+      if (self.get("submitCover") === null) {
 
-        self.set("uploadstatus", "dto done");
-        self.set("title", "");
-        self.set("authors", "");
-        self.set("year", "");
-        self.set("publisher", "");
+        var book = this.store.createRecord('book', {
+          title: title,
+          author: authors,
+          year: year,
+          publisher: publisher
+        });
+        book.save().then(showSuccessAlert, showFailAlert);
+        removeInputs(self);
 
-        Ember.$("#coverupload").fileupload(
-          {
-            url: 'http://localhost:8080/rest/v1/coverupload?uuid=' + uuid
-          }
-        );
-
+      } else {
+        self.get("submitCover").formData = {title: title, year: year, author: authors, publisher: publisher};
         self.get("submitCover").submit().
           success(function (result, textStatus, jqXHR) { // jshint ignore:line
-            //alert("success");
+            removeCover(self);
+            removeInputs(self);
+            showSuccessAlert();
+
           })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
-            self.transitionTo("servererror");
+            showFailAlert();
+
           })
           .complete(function (result, textStatus, jqXHR) {// jshint ignore:line
           });
-        //
-        //
-        //
-        //  self.transitionToRoute("books");
-      };
-      //
-      var onFail = function () {
-        self.transitionTo("serverunavailable");
-      };
-
-      book.save().then(onSuccess, onFail);
+      }
     }
   }
 });

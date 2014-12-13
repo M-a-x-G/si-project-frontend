@@ -1,5 +1,14 @@
 <div class="thumbnail book">
-    <img class="cover" {{bind-attr src='book.coverPage' alt="cover"}}/>
+    <div class="remove-overflow">
+        <button {{action "removeBook" book.id}} type="button"
+                class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
+    </div>
+
+  {{#if book.coverPage}}
+      <img class="cover" {{bind-attr src='book.coverPage' alt="cover"}}/>
+  {{else}}
+      <img class="cover" src='/assets/images/no-cover.png' alt="cover"/>
+  {{/if}}
 
     <div class="caption">
         <h3>{{book.title}}</h3>

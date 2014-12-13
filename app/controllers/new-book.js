@@ -127,15 +127,23 @@ export default Ember.Controller.extend({
 
       } else {
         self.get("submitCover").formData = {title: title, year: year, author: authors, publisher: publisher};
-        self.get("submitCover").submit().
-          success(function (result, textStatus, jqXHR) { // jshint ignore:line
+        self.get("submitCover").submit()
+          .success(function (result, textStatus, jqXHR) { // jshint ignore:line
             removeCover(self);
             removeInputs(self);
             showSuccessAlert();
+            debugger;
+            var resultJson = JSON && JSON.parse(result) || Ember.$.parseJSON(result);
+            self.store.push('book', {
+              id: resultJson.id,
+              title: resultJson.title,
+              publisher: resultJson.publisher,
+              year: resultJson.year
+            });
 
           })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
-            showFailAlert();
+            showFailAlert("");
 
           })
           .complete(function (result, textStatus, jqXHR) {// jshint ignore:line

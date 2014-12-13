@@ -26,7 +26,7 @@ export default Ember.View.extend({
           disableImageResize: /Android(?!.*Chrome)|Opera/
             .test(window.navigator.userAgent),
           //sequentialUploads: true,
-          dataType: 'text',
+          dataType: 'json',
           //formData: {script: true},
           acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
           maxFileSize: 2500000, // 2.5MB

@@ -110,8 +110,11 @@ export default Ember.Controller.extend({
       var authors = this.get('authors');
       var year = this.get('year');
       var publisher = this.get('publisher');
+      var button =  Ember.$("#submitbutton");
+      button.button("loading");
       if (!title || title === "") {
         showFailAlert("<strong>Title? </strong>Every book neets one!");
+        button.button("reset");
         return;
       }else if(really === false && (!authors || authors === "" || !publisher || publisher === "" ||!this.get("yearVal"))) {
         Ember.$("#really").modal("show");
@@ -129,15 +132,18 @@ export default Ember.Controller.extend({
         });
 
         var onSuccess = function(){
+          button.button("reset");
           showSuccessAlert("");
         };
 
         var onFail = function(){
+          button.button("reset");
           showFailAlert("");
         };
 
         book.save().then(onSuccess, onFail);
         removeInputs(self);
+        button.button("reset");
 
       } else {
         self.get("submitCover").formData = {title: title, year: year, author: authors, publisher: publisher};
@@ -153,10 +159,12 @@ export default Ember.Controller.extend({
               publisher: resultJson.publisher,
               year: resultJson.year
             });
+            button.button("reset");
 
           })
           .error(function (jqXHR, textStatus, errorThrown) {// jshint ignore:line
             showFailAlert("");
+            button.button("reset");
 
           })
           .complete(function (result, textStatus, jqXHR) {// jshint ignore:line

@@ -99,21 +99,26 @@ export default Ember.Controller.extend({
           $("#remove-cover").removeClass("hidden");// jshint ignore:line
           $("#dropzone-border").addClass("hidden");// jshint ignore:line
         }
+      }else{
+        showFailAlert("<strong>Validation failed!</strong> The given File was not valid!");
       }
     },
 
-    submitBook: function () {
+    submitBook: function (really) {
       var self = this;
       var title = this.get('title');
       var authors = this.get('authors');
       var year = this.get('year');
       var publisher = this.get('publisher');
-
       if (!title || title === "") {
-        showFailAlert("<strong>Simply no</strong>");
+        showFailAlert("<strong>Title? </strong>Every book neets one!");
         return;
+      }else if(really === false && (!authors || authors === "" || !publisher || publisher === "" ||!this.get("yearVal"))) {
+        Ember.$("#really").modal("show");
+        return;
+      }else{
+        Ember.$("#really").modal("hide");
       }
-
       if (self.get("submitCover") === null) {
 
         var book = this.store.createRecord('book', {
@@ -122,7 +127,16 @@ export default Ember.Controller.extend({
           year: year,
           publisher: publisher
         });
-        book.save().then(showSuccessAlert, showFailAlert);
+
+        var onSuccess = function(){
+          showSuccessAlert("");
+        };
+
+        var onFail = function(){
+          showFailAlert("");
+        };
+
+        book.save().then(onSuccess, onFail);
         removeInputs(self);
 
       } else {

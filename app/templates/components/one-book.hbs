@@ -1,21 +1,4 @@
 
-<div class="modal fade" id="really-remove">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Sure?</h4>
-            </div>
-            <div class="modal-body">
-                <p>You really want to delete <strong>{{book.title}}</strong>?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal">No</button>
-                <button {{action "removeBook" book.id}} type="button" class="btn btn-primary button-coloring">Yes I do</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <div class="thumbnail book">
 
@@ -36,6 +19,6 @@
     </div>
     <div class="remove-overflow">
         <button {{action "removeBook" book.id}}  type="button"
-                 data-toggle="modal" data-target="#really-remove" class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
+                  class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
     </div>
 </div>

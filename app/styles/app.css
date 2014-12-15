@@ -37,8 +37,104 @@ html, body {
   text-decoration: none;
 }
 
-.bookcontainer:hover .book:not(:hover){
-  opacity: 0.4;
+/*#columns:hover .book:not(:hover){*/
+  /*opacity: 0.4;*/
+/*}*/
+
+
+
+.btn-remove-book{
+  color: darkred;
+  background-color: #f0eee1;
+  width: 100%;
+}
+
+.btn-remove-book:hover{
+  color: darkred;
+  background-color: #f0eee1;
+}
+
+.book:hover > .remove-overflow{
+  opacity: 0.8;
+}
+
+.remove-overflow{
+  /*position: absolute;*/
+  /*background: darkred;*/
+  text-align: right;
+  /*width: 10%;*/
+  opacity: 0.3;
+
+  /*width: 100%;*/
+  /*width: 100%;*/
+  /*text-align: end;*/
+  /*padding-right: 19%;*/
+
+}
+
+.book-data{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+}
+
+.book {
+  background: #e8e6d9;
+  display: inline-block;
+  /*background: #FEFEFE;*/
+  border: 0 solid #FAFAFA;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  margin: 0 2px 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  /*padding: 15px 15px 5px;*/
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /*background: -webkit-linear-gradient(45deg, #fffdf0, #e8e6d9);*/
+  /*background: #e8e6d9;*/
+  opacity: 1;
+  min-width: 180px;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+#bookscontainer {
+  width: 90%;
+  max-width: 1100px;
+  min-width: 800px;
+  margin: 50px auto;
+}
+#columns {
+  -webkit-column-count: 3;
+  -webkit-column-gap: 10px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 10px;
+  -moz-column-fill: auto;
+  column-count: 3;
+  column-gap: 15px;
+  column-fill: auto;
+}
+
+@media (min-width: 960px) {
+  #columns {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1100px) {
+  #columns {
+    -webkit-column-count: 5;
+    -moz-column-count: 5;
+    column-count: 5;
+  }
 }
 
 /*.book:hover {*/
@@ -96,13 +192,14 @@ html, body {
   background-color: #7f6257 !important;
 }
 
-.button-coloring{
+#submitbutton{
   background-color: #824d3d;
   color: #f0eee1;
   border-top-color: #d0cebf;
   border-left-color: #d0cebf;
   border-bottom-color: #ac8c7e;
   border-right-color: #ac8c7e;
+  width: 100%;
 }
 
 .new-book{
@@ -111,18 +208,10 @@ html, body {
   background-color: #e8e6d9;
 }
 
-.btn-remove{
-  color: darkred;
-  background-color: #f0eee1;
-  display: inline;
-  margin-left: 80px;
-}
+
 
 .inline{
   display: inline;
-}
-.btn-lg{
-  width: 100%;
 }
 
 .cover{
@@ -141,10 +230,6 @@ html, body {
   -webkit-border-bottom-right-radius: 3px;
   -moz-border-radius-bottomleft: 3px;
   -moz-border-radius-bottomright: 3px;
-}
-
-.book {
-  background-color: #e8e6d9;
 }
 
 
@@ -244,25 +329,11 @@ html, body {
   height: 0; /* height 0 will give a rolling transition to 100% on hover */
 }
 
-.btn-remove-book{
+.btn-remove{
   color: darkred;
   background-color: #f0eee1;
-  margin-top: 2%;
-  opacity: 0.4;
-}
-
-.btn-remove-book:hover{
-  color: darkred;
-  background-color: #f0eee1;
-  margin-top: 2%;
-  opacity: 0.9;
+  display: inline;
+  margin-left: 80px;
 }
 
 
-.remove-overflow{
-  position: absolute;
-  width: 100%;
-  text-align: end;
-  padding-right: 19%;
-
-}

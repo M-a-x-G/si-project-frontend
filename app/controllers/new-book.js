@@ -20,7 +20,7 @@ function showSuccessAlert(message) {
   Ember.$("#alert-container").append(
     '<div class="alert alert-success alert-dismissible" role="alert">' +
     '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
-    (message === ""? message : "<strong>Great</strong> Book was added correctly.") + "</div>"
+    (message !== "" ? message : "<strong>Great</strong> Book was added correctly.") + "</div>"
   );
   alertTimeout(3500);
 }
@@ -56,6 +56,10 @@ export default Ember.Controller.extend({
   }.property("year"),
   submitCover: null,
   actions: {
+
+    resetSubmitButton: function () {
+      Ember.$("#submitbutton").button("reset");
+    },
 
     removeCover: function () {
       removeCover(this);
@@ -99,7 +103,7 @@ export default Ember.Controller.extend({
           $("#remove-cover").removeClass("hidden");// jshint ignore:line
           $("#dropzone-border").addClass("hidden");// jshint ignore:line
         }
-      }else{
+      } else {
         showFailAlert("<strong>Validation failed!</strong> The given File was not valid!");
       }
     },
@@ -110,54 +114,70 @@ export default Ember.Controller.extend({
       var authors = this.get('authors');
       var year = this.get('year');
       var publisher = this.get('publisher');
-      var button =  Ember.$("#submitbutton");
+      var button = Ember.$("#submitbutton");
+      var yearVal = this.get("yearVal");
+
       button.button("loading");
       if (!title || title === "") {
-        showFailAlert("<strong>Title? </strong>Every book neets one!");
+        showFailAlert("<strong>Title? </strong>Every book needs one!");
         button.button("reset");
         return;
-      }else if(really === false && (!authors || authors === "" || !publisher || publisher === "" ||!this.get("yearVal"))) {
+      } else if (really === false && (!authors || authors === "" || !publisher || publisher === "" || !yearVal || self.get("submitCover") === null)) {
         Ember.$("#really").modal("show");
         return;
-      }else{
+      } else {
         Ember.$("#really").modal("hide");
       }
+
+      if (!yearVal) {
+        year = 0;
+      }
+      if (!publisher) {
+        publisher = "n/a";
+      }
+
+      if(!authors){
+       authors = "n/a";
+      }
+
+
       if (self.get("submitCover") === null) {
 
         var book = this.store.createRecord('book', {
           title: title,
-          author: authors,
+          authors: authors,
           year: year,
           publisher: publisher
         });
 
-        var onSuccess = function(){
+        var onSuccess = function () {
           button.button("reset");
           showSuccessAlert("");
+          removeInputs(self);
         };
 
-        var onFail = function(){
+        var onFail = function () {
           button.button("reset");
           showFailAlert("");
         };
 
         book.save().then(onSuccess, onFail);
-        removeInputs(self);
+
         button.button("reset");
 
       } else {
-        self.get("submitCover").formData = {title: title, year: year, author: authors, publisher: publisher};
+        self.get("submitCover").formData = {title: title, year: year, authors: authors, publisher: publisher};
         self.get("submitCover").submit()
           .success(function (result, textStatus, jqXHR) { // jshint ignore:line
             removeCover(self);
             removeInputs(self);
-            showSuccessAlert();
-            var resultJson = JSON && JSON.parse(result) || Ember.$.parseJSON(result);
+            showSuccessAlert("");
             self.store.push('book', {
-              id: resultJson.id,
-              title: resultJson.title,
-              publisher: resultJson.publisher,
-              year: resultJson.year
+              id: result.id,
+              title: result.title,
+              publisher: result.publisher,
+              year: result.year,
+              authors: result.authors
             });
             button.button("reset");
 

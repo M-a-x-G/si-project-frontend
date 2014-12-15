@@ -2,23 +2,29 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button {{action "resetSubmitButton"}} type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Sure?</h4>
             </div>
             <div class="modal-body">
                 <p>Some fields are missing or not correct filled out! You really want to save the Book?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal">No</button>
-                <button {{action "submitBook" true}} type="button" class="btn btn-primary button-coloring">Yes I do</button>
+                <button {{action "resetSubmitButton"}} type="button" class="btn btn-default " data-dismiss="modal">No
+                </button>
+                <button {{action "submitBook" true}} type="button" class="btn btn-primary button-coloring">Yes I do
+                </button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div  class="new-book panel panel-default">
+<div class="new-book panel panel-default">
     <div id="new-book-panel" class="panel-body">
-        <div id="alert-container"></div>
         <form role="form" {{action "submitBook" false on="submit"}}>
+            <div id="alert-container"></div>
+
             <div class="book-upload col-md-6">
                 <h1>Add new Book</h1>
 
@@ -37,7 +43,7 @@
 
                 <div {{bind-attr class="authors:has-success:has-warning"}} class="form-group">
                     <label class="control-label" for="authors">Authors</label>
-                  {{input id="authors" type="text" placeholder="Enter author" class="form-control" value=authors aria-describedby="authorsStatus"}}
+                  {{input id="authors" type="text" placeholder="Enter authors" class="form-control" value=authors aria-describedby="authorsStatus"}}
                 </div>
 
 
@@ -66,26 +72,30 @@
                   {{/if}}
                 </div>
 
-                <input id="submitbutton" data-loading-text="Loading..." type="submit" class="btn-lg button-coloring" value="Submit Book">
+
             </div>
+
+            <div class="cover-upload col-md-6">
+                <div class="panel panel-default cover-upload-body">
+                    <div class="panel-heading cover-heading">
+                        <p class="inline panel-title branding-background-color">Cover (max 2.5MB)</p>
+                        <button {{action "removeCover"}} id="remove-cover" type="button"
+                                                         class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
+                    </div>
+                    <div id="dropzone" class="panel-body fade well">
+                        <div id="dropzone-border" class="dropzone-border">{{#if submitCover}}
+                        {{else}}
+                            <label for="coverupload" class="btn btn-success fileinput-button">
+                                select cover
+                                <input id="coverupload" type="file" name="file">
+                            </label>
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="submitbutton" data-loading-text="Loading..." type="submit" class="btn-lg button-coloring"
+                   value="Submit Book">
         </form>
-        <div class="cover-upload col-md-6">
-            <div class="panel panel-default cover-upload-body">
-                <div class="panel-heading cover-heading">
-                   <p class="inline panel-title branding-background-color">Cover (max 2.5MB)</p>
-                    <button {{action "removeCover"}} id="remove-cover" type="button" class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
-                </div>
-                <div id="dropzone" class="panel-body fade well">
-                      <div id="dropzone-border" class="dropzone-border">{{#if submitCover}}
-                      {{else}}
-                       <label for="coverupload" class="btn btn-success fileinput-button">
-                           select cover
-                          <input id="coverupload" type="file" name="file">
-                       </label>
-                      {{/if}}
-                      </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

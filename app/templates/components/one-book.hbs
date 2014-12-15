@@ -16,11 +16,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <div class="thumbnail book">
-    <div class="remove-overflow">
-        <button  type="button"
-                 data-toggle="modal" data-target="#really-remove" class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
-    </div>
 
   {{#if book.coverPage}}
       <img class="cover" {{bind-attr src='book.coverPage' alt="cover"}}/>
@@ -28,14 +25,17 @@
       <img class="cover" src='/assets/images/no-cover.png' alt="cover"/>
   {{/if}}
 
-    <div class="caption">
+    <div class="book-data">
         <h3>{{book.title}}</h3>
 
-        <p><b>Author:</b> {{book.author}}<br/></p>
+        <p><b>Author:</b> {{#if book.authors}}{{book.authors}}{{else}} n/a {{/if}}<br/></p>
 
-        <p><b>Publisher:</b> {{book.publisher}}<br/></p>
+        <p><b>Publisher:</b> {{#if book.publisher}}{{book.publisher}}{{else}} n/a {{/if}}<br/></p>
 
-        <p><b>Published: </b>{{book.year}}<br/></p>
-
+        <p><b>Published: </b>{{#if book.year}}{{book.year}}{{else}} n/a {{/if}}<br/></p>
+    </div>
+    <div class="remove-overflow">
+        <button  type="button"
+                 data-toggle="modal" data-target="#really-remove" class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
     </div>
 </div>

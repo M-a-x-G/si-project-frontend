@@ -18,7 +18,7 @@ export default Ember.View.extend({
       });
       Ember.$("#coverupload").fileupload(
         {
-          url: 'http://localhost:8080/rest/v1/coverupload',
+          url: 'http://localhost:8080/rest/v1/bookcover',
           dropZone: Ember.$('#dropzone'),
           // Enable image resizing, except for Android and Opera,
           // which actually support image resizing, but fail to

@@ -1,14 +1,20 @@
-<div class="bookcontainer">
-  {{#each}}
-      <div class="col-lg-3">
+<div id="bookscontainer" class="bookcontainer">
+    <div id="columns">
+      {{#each}}
+
+
+          <!--<div class="col-lg-3">-->
         {{one-book book=this}}
-      </div>
-  {{else}}
-      <div class='jumbotron'>
-          <h1>No books added</h1>
+          <!--</div>-->
 
-        {{#link-to "new_book"}} <p>Click here to add a book.</p> {{/link-to}}
-      </div>
+      {{else}}
+          <div class='jumbotron'>
+              <h1>No books added</h1>
 
-  {{/each}}
+            {{#link-to "new_book"}} <p>Click here to add a book.</p> {{/link-to}}
+          </div>
+
+      {{/each}}
+
+    </div>
 </div>

@@ -22,8 +22,10 @@ export default Ember.ArrayController.extend({
     },
 
     search: function () {
-      if (this.get("searchText")) {
-        this.set("value", this.get("searchText"));
+      var searchText = this.get("searchText");
+      if (searchText) {
+        this.set("value", searchText);
+        this.set("searchText","");
       } else {
         this.set("value", "");
       }

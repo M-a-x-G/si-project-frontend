@@ -74,34 +74,33 @@
 
 
             </div>
-
-            <div class="cover-upload col-md-6">
-                <div class="panel panel-default cover-upload-body">
-                    <div class="panel-heading cover-heading">
-                        <p class="inline panel-title branding-background-color">Cover (max 2.5MB)</p>
-                        <button {{action "removeCover"}} id="remove-cover" type="button"
-                                                         class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
-                    </div>
-                    <div id="dropzone" class="panel-body fade well">
+                <div class="cover-upload col-md-6">
+                    <div class="panel panel-default cover-upload-body">
+                        <div class="panel-heading cover-heading">
+                            <p class="inline panel-title branding-background-color">Cover (max 2.5MB)</p>
+                            <button {{action "removeCover"}} id="remove-cover" type="button"
+                                                             class="hidden btn btn-default btn-remove glyphicon glyphicon-trash"></button>
+                        </div>
+                        <div id="dropzone" class="panel-body fade well">
 
                           {{#if coverUrl}}
                               <img {{bind-attr src=coverUrl}} class="cover" alt="cover"/>
-                        {{else}}
-                          <div id="dropzone-border" class="dropzone-border">
-                            <label for="coverupload" class="btn btn-success fileinput-button">
-                                select cover
-                                <input id="coverupload" type="file" name="file">
-                            </label>
-                          </div>
-                        {{/if}}
+                          {{/if}}
+                              <div id="dropzone-border" class="dropzone-border">
+                                  <label id="cover-input-label" for="coverupload" class="btn btn-success fileinput-button">
+                                      select cover
+                                      <input id="coverupload" type="file" name="file">
+                                  </label>
+                              </div>
 
+
+                        </div>
                     </div>
                 </div>
+            <div>
+                <input id="submitbutton" data-loading-text="Loading..." type="submit" class="btn-lg button-coloring"
+                       value="Submit Book">
             </div>
-          <div>
-            <input id="submitbutton" data-loading-text="Loading..." type="submit" class="btn-lg button-coloring"
-                   value="Submit Book">
-          </div>
         </form>
     </div>
 </div>

@@ -39,27 +39,6 @@ function removeCover(controller) {
   controller.set("coverUrl", "");
   $("#remove-cover").addClass("hidden");// jshint ignore:line
   $("#dropzone-border").removeClass("hidden");// jshint ignore:line
-  //Ember.$("#coverupload").fileupload("destroy");
-  //Ember.$("#coverupload").fileupload(
-  //  {
-  //    url: 'http://localhost:8080/rest/v1/bookcover',
-  //    dropZone: Ember.$('#dropzone'),
-  //    // Enable image resizing, except for Android and Opera,
-  //    // which actually support image resizing, but fail to
-  //    // send Blob objects via XHR requests:
-  //    //disableImageResize: /Android(?!.*Chrome)|Opera/
-  //    //  .test(window.navigator.userAgent),
-  //    //sequentialUploads: true,
-  //    dataType: 'json',
-  //    //formData: {script: true},
-  //    //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
-  //    //maxFileSize: 2500000, // 2.5MB
-  //    add: function (e, data) {
-  //      self.get('controller').send("saveFile", data);
-  //    }
-  //
-  //  }
-  //);
 }
 
 function removeInputs(controller) {
@@ -78,6 +57,7 @@ export default Ember.Controller.extend({
   submitCover: null,
   coverUrl: "",
   actions: {
+
 
     resetSubmitButton: function () {
       Ember.$("#submitbutton").button("reset");

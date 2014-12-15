@@ -1,7 +1,8 @@
 <div class="input-group">
   {{input id="search-field" valueBinding='searchText' placeholder="Search"  class="form-control"}}
     <div class="input-group-btn">
-        <button type="button" class="btn btn-default" {{action "search" on="click" }}>Search {{searchButtonText}}</button>
+        <button type="button" class="btn btn-default" {{action "search" on="click" }}>
+            Search {{searchButtonText}}</button>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <span class="caret"></span></button>
 
@@ -17,10 +18,14 @@
 <br>
 <br>
 {{#if isSearched}}
-<div class="bookcontainer">
-  {{#each}}
-      <div class="col-lg-3">
-        {{one-book book=this}}
+
+  {{#if model}}
+      <div id="bookscontainer" class="bookcontainer">
+          <div id="columns">
+            {{#each}}
+              {{one-book book=this}}
+            {{/each}}
+          </div>
       </div>
   {{else}}
       <div class='jumbotron'>
@@ -28,6 +33,6 @@
 
           <p>There are no books that matches your query.</p>
       </div>
-  {{/each}}
-</div>
+  {{/if}}
+
 {{/if}}

@@ -23,16 +23,17 @@ export default Ember.View.extend({
           // Enable image resizing, except for Android and Opera,
           // which actually support image resizing, but fail to
           // send Blob objects via XHR requests:
-          disableImageResize: /Android(?!.*Chrome)|Opera/
-            .test(window.navigator.userAgent),
+          //disableImageResize: /Android(?!.*Chrome)|Opera/
+          //  .test(window.navigator.userAgent),
           //sequentialUploads: true,
           dataType: 'json',
           //formData: {script: true},
-          acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
-          maxFileSize: 2500000, // 2.5MB
+          //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+          //maxFileSize: 2500000, // 2.5MB
           add: function (e, data) {
             self.get('controller').send("saveFile", data);
           }
+
         }
       );
     });

@@ -36,9 +36,30 @@ function showFailAlert(message) {
 
 function removeCover(controller) {
   controller.set("submitCover", null);
-  $("#cover-image").remove();// jshint ignore:line
+  controller.set("coverUrl", "");
   $("#remove-cover").addClass("hidden");// jshint ignore:line
   $("#dropzone-border").removeClass("hidden");// jshint ignore:line
+  //Ember.$("#coverupload").fileupload("destroy");
+  //Ember.$("#coverupload").fileupload(
+  //  {
+  //    url: 'http://localhost:8080/rest/v1/bookcover',
+  //    dropZone: Ember.$('#dropzone'),
+  //    // Enable image resizing, except for Android and Opera,
+  //    // which actually support image resizing, but fail to
+  //    // send Blob objects via XHR requests:
+  //    //disableImageResize: /Android(?!.*Chrome)|Opera/
+  //    //  .test(window.navigator.userAgent),
+  //    //sequentialUploads: true,
+  //    dataType: 'json',
+  //    //formData: {script: true},
+  //    //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+  //    //maxFileSize: 2500000, // 2.5MB
+  //    add: function (e, data) {
+  //      self.get('controller').send("saveFile", data);
+  //    }
+  //
+  //  }
+  //);
 }
 
 function removeInputs(controller) {
@@ -55,6 +76,7 @@ export default Ember.Controller.extend({
     return year !== 0;
   }.property("year"),
   submitCover: null,
+  coverUrl: "",
   actions: {
 
     resetSubmitButton: function () {
@@ -66,40 +88,15 @@ export default Ember.Controller.extend({
     },
 
     saveFile: function (cover) {
-
       if (cover && isValidImage(cover.files[0])) {
         this.set("submitCover", cover);
 
-        $("#cover-image").remove();// jshint ignore:line
         var URL = window.URL || window.webkitURL,
-          imageUrl,
-          image;
+          imageUrl;
 
         if (URL) {
           imageUrl = URL.createObjectURL(cover.files[0]);
-          image = document.createElement("img");
-
-          $(image)// jshint ignore:line
-            // once the image has loaded, execute this code
-            .load(function () {
-              // set the image hidden by default
-              $(this).hide().addClass("cover-image").attr("id", "cover-image");// jshint ignore:line
-
-              $('#dropzone')// jshint ignore:line
-                .append(this);
-
-              // fade our image in to create a nice effect
-              $(this).fadeIn();// jshint ignore:line
-            })
-
-            // if there was an error loading the image, react accordingly
-            .error(function () {
-              showFailAlert("<strong>Oh no!</strong> Error while loading image.");
-              // notify the user that the image could not be loaded
-            })
-
-            // *finally*, set the src attribute of the new image to our image
-            .attr('src', imageUrl);
+          this.set("coverUrl", imageUrl);
           $("#remove-cover").removeClass("hidden");// jshint ignore:line
           $("#dropzone-border").addClass("hidden");// jshint ignore:line
         }

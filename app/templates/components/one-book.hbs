@@ -35,7 +35,7 @@
         <p><b>Published: </b>{{#if book.year}}{{book.year}}{{else}} n/a {{/if}}<br/></p>
     </div>
     <div class="remove-overflow">
-        <button  type="button"
+        <button {{action "removeBook" book.id}}  type="button"
                  data-toggle="modal" data-target="#really-remove" class="btn btn-default btn-remove-book glyphicon glyphicon-trash"></button>
     </div>
 </div>

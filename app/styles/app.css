@@ -94,10 +94,7 @@ html, body {
   -moz-column-break-inside: avoid;
   column-break-inside: avoid;
   /*padding: 15px 15px 5px;*/
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
   /*background: -webkit-linear-gradient(45deg, #fffdf0, #e8e6d9);*/
   /*background: #e8e6d9;*/
   opacity: 1;
@@ -120,7 +117,7 @@ html, body {
   -webkit-column-fill: auto;
   -moz-column-count: 3;
   -moz-column-gap: 10px;
-  -moz-column-fill: auto;
+  /*-moz-column-fill: auto;*/
   column-count: 3;
   column-gap: 15px;
   column-fill: auto;
@@ -198,7 +195,6 @@ html, body {
   border-bottom-color: #ac8c7e;
   border-right-color: #ac8c7e;
   width: 100%;
-  display: block;
   position: relative;
 }
 
